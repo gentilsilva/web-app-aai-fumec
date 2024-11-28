@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>ScGest</title>
+</head>
+
+<body>
+    <div layout:fragment="conteudo">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-logo">
+                        <img src="../static/assets/logo.png" alt="Médico com máscara" th:src="@{/assets/logo.png}"> ScGest
+                    </h1>
+                    <h2 class="hero-title">Gestão escolar simples <span>para simplificar instituição</span></h2>
+                    <p class="hero-subtitle">e aumentar a produtividade <br/> do seu negocio!</p>
+                </div>
+                <div class="hero-image">
+                    <img src="../static/assets/livros.png" alt="imagens de estudantes" th:src="@{/assets/livros.png}">
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Listagem de Universitários</title>
+</head>
+
+<body>
+    <div layout:fragment="conteudo">
+        <main class="container">
+            <section class="card">
+                <h2 class="title">Listagem de Universitários</h2>
+
+                <div class="table-controls">
+                    <a href="formulario-universitario.html" th:href="@{/universitarios/formulario}" class="btn btn-tertiary">
+                        <img src="/static/assets/plus.png" th:src="@{/assets/plus.png}" alt="Ícone de adicionar" class="btn-icon">
+                        Novo Universitário
+                    </a>
+                </div>
+
+                <table class="tabela">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Matricula</th>
+                            <th>Email Universitario</th>
+                            <th>Telefone</th>
+                            <th>CPF</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="universitario: ${universitarios}">
+                            <td th:text="${universitario.nome}"></td>
+                            <td th:text="${universitario.matricula}"></td>
+                            <td th:text="${universitario.emailUniversitario}"></td>
+                            <td th:text="${universitario.telefone}"></td>
+                            <td th:text="${universitario.cpf}"></td>
+                            <td>
+                                <a href="#" class="btn btn-edit" th:href="@{/universitarios/formulario?id={id}(id=${universitario.id})}" title="Editar">
+                                    <img src="/static/assets/edit.svg" th:src="@{/assets/edit.svg}" alt="Editar">
+                                </a>
+
+                                <a href="#deleteModal" class="btn btn-delete" data-toggle="modal" th:data-id="${universitario.id}" data-url="/universitarios" title="Excluir">
+                                    <img src="/static/assets/delete.svg" th:src="@{/assets/delete.svg}" alt="Excluir">
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div th:replace="~{componentes/_paginacao.html :: paginacao(url = 'universitarios', registros = ${universitarios})}"></div>
+            </section>
+        </main>
+
+        <div th:replace="~{componentes/_modal_excluir.html :: modal}"></div>
+    </div>
+</body>
+</html>
