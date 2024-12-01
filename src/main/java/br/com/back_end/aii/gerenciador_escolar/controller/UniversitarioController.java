@@ -30,7 +30,6 @@ public class UniversitarioController {
     @GetMapping
     public String getPaginaListagem(@PageableDefault Pageable paginacao, Model model) {
         Page<DadosListagemUniversitario> dadosListagemUniversitario = universitarioService.listar(paginacao);
-        dadosListagemUniversitario.forEach(System.out::println);
         model.addAttribute("universitarios", dadosListagemUniversitario);
         return PAGINA_LISTAGEM;
     }

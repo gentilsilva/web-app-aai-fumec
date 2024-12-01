@@ -11,9 +11,9 @@
     <div layout:fragment="conteudo">
         <main class="container">
             <section class="card form-card">
-                <h2 class="title">Cadastro de médico</h2>
+                <h2 class="title">Cadastro de professor</h2>
 
-                <form method="post" action="#" th:action="@{/medicos}" th:object="${dados}">
+                <form method="post" action="#" th:action="@{/professores}" th:object="${dados}">
                     <input type="hidden" name="id" th:field="*{id}">
 
                     <div class="form-group">
@@ -29,24 +29,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="telefone">Telefone:</label>
-                        <input id="telefone" name="telefone" th:field="*{telefone}" required>
-                        <div class="alert alert-danger" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+                        <label for="cpf">CPF:</label>
+                        <input id="cpf" name="cpf" th:field="*{cpf}" required>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
                     </div>
 
                     <div class="form-group">
-                        <label for="crm">CRM:</label>
-                        <input id="crm" name="crm" th:field="*{crm}" required>
-                        <div class="alert alert-danger" th:if="${#fields.hasErrors('crm')}" th:errors="*{crm}"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="especialidade">Especialidade</label>
-                        <select id="especialidade" name="especialidade" required th:field="*{especialidade}">
-                            <option th:value="${null}">Selecione uma especialidade</option>
-                            <option th:each="especialidade : ${especialidades}" th:value="${especialidade}" th:text="${especialidade}" th:selected="${dados.especialidade == especialidade}"></option>
+                        <label for="formacao">Formação</label>
+                        <select id="formacao" name="formacao" required th:field="*{formacao}">
+                            <option th:value="${null}">Selecione uma formacao</option>
+                            <option th:each="formacao : ${formacoes}" th:value="${formacao}" th:text="${formacao}" th:selected="${dados.formacao == formacao}"></option>
                         </select>
-                        <div class="alert alert-danger" th:if="${#fields.hasErrors('especialidade')}" th:errors="*{especialidade}"></div>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('formacao')}" th:errors="*{formacao}"></div>
                     </div>
 
                     <div class="buttons">
@@ -54,7 +48,7 @@
                             <img src="/static/assets/plus.png" th:src="@{/assets/plus.png}" alt="Ícone de adicionar" class="btn-icon">Cadastrar
                         </button>
 
-                        <a href="listagem-professores.html" th:href="@{/medicos}" class="btn btn-secondary">
+                        <a href="listagem-professor.html" th:href="@{/professores}" class="btn btn-secondary">
                             <img src="/static/assets/back.png" th:src="@{/assets/back.png}" alt="Voltar" class="btn-icon">Voltar
                         </a>
                     </div>

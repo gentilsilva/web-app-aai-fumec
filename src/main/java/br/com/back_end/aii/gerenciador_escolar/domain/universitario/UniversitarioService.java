@@ -33,7 +33,7 @@ public class UniversitarioService {
     }
 
     public DadosCadastroUniversitario carregarPorId(Long id) {
-        var universitario = universitarioRepository.findByIdAndAtivoTrue(id).orElseThrow();
+        Universitario universitario = universitarioRepository.findByIdAndAtivoTrue(id).orElseThrow();
         return new DadosCadastroUniversitario(universitario.getId(), universitario.getNome(),
                 universitario.getEmailUniversitario(), universitario.getTelefone(), universitario.getCpf());
     }
