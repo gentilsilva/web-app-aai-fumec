@@ -5,43 +5,45 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{template.html}">
 <head>
-    <title>Listagem de Turmas</title>
+    <title>Listagem de Matriculas</title>
 </head>
 
 <body>
     <div layout:fragment="conteudo">
         <main class="container">
             <section class="card">
-                <h2 class="title">Listagem de turmas</h2>
+                <h2 class="title">Listagem de matricula</h2>
 
-                <div class="table-controls" sec:authorize="hasRole('GESTOR')">
-                    <a href="formulario-turma.html" th:href="@{/turmas/formulario}" class="btn btn-tertiary">
+                <div class="table-controls">
+                    <a href="formulario-matricula.html" th:href="@{/matriculas/formulario}" class="btn btn-tertiary">
                         <img src="/static/assets/plus.png" th:src="@{/assets/plus.png}" alt="Ícone de adicionar" class="btn-icon">
-                        Nova Turma
+                        Nova Matricula
                     </a>
                 </div>
 
                 <table class="tabela">
                     <thead>
                         <tr>
+                            <th>Universitario</th>
                             <th>Turma</th>
-                            <th>Professor</th>
-                            <th>Materia</th>
+                            <th>Data de Matricula</th>
+                            <th>Status Matricula</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr th:each="turma: ${turmas}">
-                            <td th:text="${turma.nome}"></td>
-                            <td th:text="${turma.professor.nome}"></td>
-                            <td th:text="${turma.materia.nome}"></td>
-                            <td sec:authorize="hasRole('GESTOR')">
-                                <a href="#" class="btn btn-edit" th:href="@{/turmas/formulario?id={id}(id=${turma.id})}" title="Editar">
+                        <tr th:each="matricula: ${matriculas}">
+                            <td th:text="${matricula.universitario.nome}"></td>
+                            <td th:text="${matricula.turma.nome}"></td>
+                            <td th:text="${matricula.dataMatricula}"></td>
+                            <td th:text="${matricula.status}"></td>
+                            <td sec:authorize="hasAnyRole('GESTOR', 'UNIVERSITARIO')">
+                                <a href="#" class="btn btn-edit" th:href="@{/matriculas/formulario?id={id}(id=${matricula.id})}" title="Editar">
                                     <img src="/static/assets/edit.svg" th:src="@{/assets/edit.svg}" alt="Editar">
                                 </a>
 
-                                <a href="#deleteModal" class="btn btn-delete" data-toggle="modal" th:data-id="${turma.id}" data-url="/turmas" title="Excluir">
+                                <a href="#deleteModal" class="btn btn-delete" data-toggle="modal" th:data-id="${matricula.id}" data-url="/matriculas" title="Excluir">
                                     <img src="/static/assets/delete.svg" th:src="@{/assets/delete.svg}" alt="Excluir">
                                 </a>
                             </td>
@@ -49,7 +51,7 @@
                     </tbody>
                 </table>
 
-                <div th:replace="~{componentes/_paginacao.html :: paginacao(url = 'turmas', registros = ${turmas})}"></div>
+                <div th:replace="~{componentes/_paginacao.html :: paginacao(url = 'matricula', registros = ${matricula})}"></div>
             </section>
         </main>
 

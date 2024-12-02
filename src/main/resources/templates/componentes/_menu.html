@@ -18,11 +18,15 @@
                             <a href="../universitarios/listagem-universitario.html" th:href="@{/universitarios}">Universitarios</a>
                         </li>
 
-                        <li sec:authorize="hasRole('GESTOR')">
+                        <li>
                             <a href="../materias/listagem-materia.html.html" th:href="@{/materias}">Matérias</a>
                         </li>
 
-                        <li>
+                        <li sec:authorize="hasAnyRole('GESTOR', 'UNIVERSITARIO')">
+                            <a href="../materias/listagem-materia.html.html" th:href="@{/matriculas}">Matriculas</a>
+                        </li>
+
+                        <li sec:authorize="hasAnyRole('GESTOR', 'PROFESSOR')">
                             <a href="../universitarios/listagem-turma.html" th:href="@{/turmas}">Turmas</a>
                         </li>
 

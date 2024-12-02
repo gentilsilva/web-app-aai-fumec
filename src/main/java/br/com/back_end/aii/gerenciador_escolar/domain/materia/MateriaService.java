@@ -1,7 +1,6 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.materia;
 
 import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
-import br.com.back_end.aii.gerenciador_escolar.domain.professor.DadosListagemProfessor;
 import br.com.back_end.aii.gerenciador_escolar.infra.exception.RegraDeNegocioException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

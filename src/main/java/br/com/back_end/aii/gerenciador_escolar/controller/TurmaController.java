@@ -61,11 +61,7 @@ public class TurmaController {
 
     @GetMapping("/formulario")
     public String getPaginaCadastro(Long id, Model model) {
-        if (id != null) {
-            model.addAttribute("dados", turmaService.carregarPorId(id));
-        } else {
-            model.addAttribute("dados", new DadosCadastroTurma(null, "", null,null));
-        }
+        model.addAttribute("dados", new DadosCadastroTurma(null, "", null,null));
         return PAGINA_CADASTRO;
     }
 

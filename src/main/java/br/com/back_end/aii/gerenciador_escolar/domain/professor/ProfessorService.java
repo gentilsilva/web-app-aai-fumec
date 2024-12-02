@@ -35,7 +35,7 @@ public class ProfessorService {
             professor.setEmailUniversitario(emailUniversitario);
 
             Long id = usuarioService.salvarUsuario(professor.getNome(), professor.getEmailUniversitario(),
-                    professor.getCpf(), professor.getEmail(),Perfil.PROFESSOR);
+                    professor.getEmail(), professor.getCpf(),Perfil.PROFESSOR);
 
             professor.setId(id);
 

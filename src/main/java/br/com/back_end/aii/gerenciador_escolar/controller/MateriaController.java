@@ -19,7 +19,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/materias")
-@PreAuthorize("hasRole('GESTOR')")
 public class MateriaController {
 
     private static final String PAGINA_LISTAGEM = "materias/listagem-materia";

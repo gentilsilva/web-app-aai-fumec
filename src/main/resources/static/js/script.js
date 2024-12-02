@@ -19,14 +19,14 @@ $('#updateModal').on('show.bs.modal', function (e) {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    const especialidadeSelect = document.getElementById('especialidade');
+    const especialidadeSelect = document.getElementById('formacao');
     if (especialidadeSelect) {
-        const medicoSelect = document.getElementById('idMedico');
+        const professorSelect = document.getElementById('idProfessor');
 
         especialidadeSelect.addEventListener('change', function() {
             const especialidade = especialidadeSelect.value;
 
-            medicoSelect.innerHTML = '<option value="">Selecione um médico</option>';
+            professorSelect.innerHTML = '<option value="">Selecione um professor</option>';
 
             if (especialidade) {
                 fetch('/medicos/' + especialidade)
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             const option = document.createElement('option');
                             option.value = medico.id;
                             option.text = medico.nome;
-                            medicoSelect.appendChild(option);
+                            professorSelect.appendChild(option);
                         });
                     })
                     .catch(error => console.error('Erro:', error));

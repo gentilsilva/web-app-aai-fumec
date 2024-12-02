@@ -2,6 +2,7 @@ package br.com.back_end.aii.gerenciador_escolar.domain.turma;
 
 import br.com.back_end.aii.gerenciador_escolar.domain.materia.Materia;
 import br.com.back_end.aii.gerenciador_escolar.domain.materia.MateriaRepository;
+import br.com.back_end.aii.gerenciador_escolar.domain.professor.DadosCadastroProfessor;
 import br.com.back_end.aii.gerenciador_escolar.domain.professor.Professor;
 import br.com.back_end.aii.gerenciador_escolar.domain.professor.ProfessorRepository;
 import br.com.back_end.aii.gerenciador_escolar.domain.usuario.Perfil;
@@ -10,6 +11,8 @@ import br.com.back_end.aii.gerenciador_escolar.infra.exception.RegraDeNegocioExc
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TurmaService {
@@ -31,16 +34,11 @@ public class TurmaService {
         return turmaRepository.buscaPersonalizadaTurma(usuarioLogado.getId(), paginacao);
     }
 
-    public Object carregarPorId(Long id) {
-        return null;
-    }
-
     public void excluir(Long id) {
         materiaRepository.deleteById(id);
     }
 
     public void cadastrarTurma(DadosCadastroTurma dados) {
-        System.out.println(dados.professor());
         Professor professor = professorRepository.findByIdAndAtivoTrue(dados.professor()).orElseThrow(
                 () -> new RegraDeNegocioException("Professor não encontrado.")
         );
@@ -52,5 +50,9 @@ public class TurmaService {
             Turma turma = new Turma(dados, professor, materia);
             turmaRepository.save(turma);
         }
+    }
+
+    public List<DadosListagemTurma> carregaTudo() {
+        return turmaRepository.findAll().stream().map(DadosListagemTurma::new).toList();
     }
 }

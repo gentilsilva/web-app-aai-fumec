@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Cadastro de Matriculas</title>
+</head>
+
+<body>
+    <div layout:fragment="conteudo">
+        <main class="container">
+            <section class="card form-card">
+                <h2 class="title">Cadastro de matriculas</h2>
+
+                <form method="post" action="#" th:action="@{/matriculas}" th:object="${dados}">
+                    <input type="hidden" name="id" th:field="*{id}">
+
+                    <div class="form-group">
+                        <label for="turma">Matriculas</label>
+                        <select id="turma" name="turma" required th:field="*{turma}">
+                            <option th:value="${null}">Selecione uma Turma</option>
+                            <option th:each="turma : ${turmas}" th:value="${turma.id}" th:text="${turma.nome}" th:selected="${dados.turma != null and dados.turma == turma.id}">}"></option>
+                        </select>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('turma')}" th:errors="*{turma}"></div>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <img src="/static/assets/plus.png" th:src="@{/assets/plus.png}" alt="Ícone de adicionar" class="btn-icon">Cadastrar
+                        </button>
+
+                        <a href="listagem-matricula.html" th:href="@{/matriculas}" class="btn btn-secondary">
+                            <img src="/static/assets/back.png" th:src="@{/assets/back.png}" alt="Voltar" class="btn-icon">Voltar
+                        </a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

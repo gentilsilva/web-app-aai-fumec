@@ -1,5 +1,6 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.universitario;
 
+import br.com.back_end.aii.gerenciador_escolar.domain.professor.DadosListagemProfessor;
 import br.com.back_end.aii.gerenciador_escolar.domain.usuario.Perfil;
 import br.com.back_end.aii.gerenciador_escolar.domain.usuario.UsuarioService;
 import br.com.back_end.aii.gerenciador_escolar.infra.exception.RegraDeNegocioException;
@@ -7,6 +8,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
