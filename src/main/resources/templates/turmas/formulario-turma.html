@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Cadastro de Turmas</title>
+</head>
+
+<body>
+    <div layout:fragment="conteudo">
+        <main class="container">
+            <section class="card form-card">
+                <h2 class="title">Cadastro de turmas</h2>
+
+                <form method="post" action="#" th:action="@{/turmas}" th:object="${dados}">
+                    <input type="hidden" name="id" th:field="*{id}">
+
+                    <div class="form-group">
+                        <label for="nome">Turma:</label>
+                        <input id="nome" name="nome" th:field="*{nome}" required>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro!</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="professor">Professor</label>
+                        <select id="professor" name="professor" required th:field="*{professor}">
+                            <option th:value="${null}">Selecione um Professor</option>
+                            <option th:each="professor : ${professores}" th:value="${professor.id}" th:text="${professor.nome}" th:selected="${dados.professor != null && dados.professor == professor.id}"></option>
+                        </select>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('professor')}" th:errors="*{professor}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="materia">Materia</label>
+                        <select id="materia" name="materia" required th:field="*{materia}">
+                            <option th:value="${null}">Selecione um Professor</option>
+                            <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nome}" th:selected="${dados.materia != null and dados.materia == materia.id}">}"></option>
+                        </select>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('materia')}" th:errors="*{materia}"></div>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <img src="/static/assets/plus.png" th:src="@{/assets/plus.png}" alt="Ícone de adicionar" class="btn-icon">Cadastrar
+                        </button>
+
+                        <a href="listagem-turma.html" th:href="@{/professores}" class="btn btn-secondary">
+                            <img src="/static/assets/back.png" th:src="@{/assets/back.png}" alt="Voltar" class="btn-icon">Voltar
+                        </a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

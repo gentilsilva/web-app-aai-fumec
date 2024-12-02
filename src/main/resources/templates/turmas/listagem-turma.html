@@ -5,17 +5,17 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{template.html}">
 <head>
-    <title>Listagem de Professores</title>
+    <title>Listagem de Turmas</title>
 </head>
 
 <body>
     <div layout:fragment="conteudo">
         <main class="container">
             <section class="card">
-                <h2 class="title">Listagem de professores</h2>
+                <h2 class="title">Listagem de turmas</h2>
 
                 <div class="table-controls" sec:authorize="hasRole('GESTOR')">
-                    <a href="formulario-professor.html" th:href="@{/professores/formulario}" class="btn btn-tertiary">
+                    <a href="formulario-turma.html" th:href="@{/turmas/formulario}" class="btn btn-tertiary">
                         <img src="/static/assets/plus.png" th:src="@{/assets/plus.png}" alt="Ícone de adicionar" class="btn-icon">
                         Novo Professor
                     </a>
@@ -24,28 +24,24 @@
                 <table class="tabela">
                     <thead>
                         <tr>
-                            <th>Matricula</th>
-                            <th>Nome</th>
-                            <th>email</th>
-                            <th>Cpf</th>
-                            <th>Formacao</th>
-                            <th sec:authorize="hasRole('GESTOR')">Ações</th>
+                            <th>Turma</th>
+                            <th>Professor</th>
+                            <th>Materia</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr th:each="professor: ${professores}">
-                            <td th:text="${professor.matricula}"></td>
-                            <td th:text="${professor.nome}"></td>
-                            <td th:text="${professor.emailUniversitario}"></td>
-                            <td th:text="${professor.cpf}"></td>
-                            <td th:text="${professor.formacao}"></td>
+                        <tr th:each="turma: ${turmas}">
+                            <td th:text="${turma.nome}"></td>
+                            <td th:text="${turma.professor.nome}"></td>
+                            <td th:text="${turma.materia.nome}"></td>
                             <td sec:authorize="hasRole('GESTOR')">
-                                <a href="#" class="btn btn-edit" th:href="@{/professores/formulario?id={id}(id=${professor.id})}" title="Editar">
+                                <a href="#" class="btn btn-edit" th:href="@{/turmas/formulario?id={id}(id=${turma.id})}" title="Editar">
                                     <img src="/static/assets/edit.svg" th:src="@{/assets/edit.svg}" alt="Editar">
                                 </a>
 
-                                <a href="#deleteModal" class="btn btn-delete" data-toggle="modal" th:data-id="${professor.id}" data-url="/professores" title="Excluir">
+                                <a href="#deleteModal" class="btn btn-delete" data-toggle="modal" th:data-id="${turma.id}" data-url="/turmas" title="Excluir">
                                     <img src="/static/assets/delete.svg" th:src="@{/assets/delete.svg}" alt="Excluir">
                                 </a>
                             </td>
@@ -53,7 +49,7 @@
                     </tbody>
                 </table>
 
-                <div th:replace="~{componentes/_paginacao.html :: paginacao(url = 'professores', registros = ${professores})}"></div>
+                <div th:replace="~{componentes/_paginacao.html :: paginacao(url = 'turmas', registros = ${turmas})}"></div>
             </section>
         </main>
 

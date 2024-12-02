@@ -1,6 +1,7 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.materia;
 
 import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
+import br.com.back_end.aii.gerenciador_escolar.domain.professor.DadosListagemProfessor;
 import br.com.back_end.aii.gerenciador_escolar.infra.exception.RegraDeNegocioException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,5 +42,9 @@ public class MateriaService {
 
     public void excluir(Long id) {
         materiaRepository.deleteById(id);
+    }
+
+    public List<DadosListagemMateria> carregaTudo() {
+        return materiaRepository.findAll().stream().map(DadosListagemMateria::new).toList();
     }
 }

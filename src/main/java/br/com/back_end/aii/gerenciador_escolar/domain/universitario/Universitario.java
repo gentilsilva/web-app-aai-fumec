@@ -1,7 +1,9 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.universitario;
 
+import br.com.back_end.aii.gerenciador_escolar.domain.matricula.Matricula;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +21,9 @@ public class Universitario {
     private String telefone;
     private String cpf;
     private Boolean ativo;
+
+    @OneToMany(mappedBy = "universitario")
+    private List<Matricula> matriculas; // Lista de matrículas
 
 
     public Universitario() {

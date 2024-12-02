@@ -64,4 +64,8 @@ public class ProfessorService {
     public List<DadosListagemProfessor> listarPorFormacao(Formacao formacao) {
         return professorRepository.findByFormacao(formacao).stream().map(DadosListagemProfessor::new).toList();
     }
+
+    public List<DadosListagemProfessor> carregaTudo() {
+        return professorRepository.findAllByAtivoTrue().stream().map(DadosListagemProfessor::new).toList();
+    }
 }

@@ -39,8 +39,8 @@ public class ProfessorController {
 
     @GetMapping
     public String getPaginaListagem(@PageableDefault Pageable paginacao, Model model) {
-        Page<DadosListagemProfessor> dadosListagemProfessorPage = professorService.listar(paginacao);
-        model.addAttribute("professores", dadosListagemProfessorPage);
+        Page<DadosListagemProfessor> dadosListagemProfessor = professorService.listar(paginacao);
+        model.addAttribute("professores", dadosListagemProfessor);
         return PAGINA_LISTAGEM;
     }
 
