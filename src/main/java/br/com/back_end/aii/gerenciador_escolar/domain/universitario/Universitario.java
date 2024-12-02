@@ -9,7 +9,6 @@ import java.util.UUID;
 public class Universitario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String matricula;
     private String nome;
@@ -37,6 +36,10 @@ public class Universitario {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getMatricula() {
         return matricula;
     }
@@ -47,6 +50,10 @@ public class Universitario {
 
     public String getEmailUniversitario() {
         return emailUniversitario;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getCpf() {
@@ -71,7 +78,7 @@ public class Universitario {
     }
 
     public String geradorEmailUniversitario(String matricula) {
-        return matricula + "@fumec.br";
+        return matricula + "@scgest.br";
     }
 
     public void desativarUniversitario() {

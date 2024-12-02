@@ -1,5 +1,8 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.professor;
 
+import br.com.back_end.aii.gerenciador_escolar.domain.universitario.Universitario;
+import br.com.back_end.aii.gerenciador_escolar.domain.usuario.Perfil;
+import br.com.back_end.aii.gerenciador_escolar.domain.usuario.UsuarioService;
 import br.com.back_end.aii.gerenciador_escolar.infra.exception.RegraDeNegocioException;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -11,21 +14,33 @@ import java.util.List;
 @Service
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
+    private final UsuarioService usuarioService;
 
-    public ProfessorService(ProfessorRepository professorRepository) {
+    public ProfessorService(ProfessorRepository professorRepository, UsuarioService usuarioService) {
         this.professorRepository = professorRepository;
+        this.usuarioService = usuarioService;
     }
 
-    public Professor cadastrarProfessor(DadosCadastroProfessor dadosCadastroProfessor) {
-        Professor professor = new Professor(dadosCadastroProfessor);
-        String matricula = professor.geradorMatricula();
-        String emailUniversitario = professor.geradorEmailUniversitario(matricula);
-        professor.setMatricula(matricula);
-        professor.setEmailUniversitario(emailUniversitario);
+    public void cadastrarProfessor(DadosCadastroProfessor dadosCadastroProfessor) {
+        if(professorRepository.jaCadastrado(dadosCadastroProfessor.id(), dadosCadastroProfessor.cpf(),
+                dadosCadastroProfessor.email())) {
+            throw new RegraDeNegocioException("E-mail ou CPF já cadastrado para outro professor!");
+        }
 
-        professorRepository.save(professor);
+        if(dadosCadastroProfessor.id() == null) {
+            Professor professor = new Professor(dadosCadastroProfessor);
+            String matricula = professor.geradorMatricula();
+            String emailUniversitario = professor.geradorEmailUniversitario(matricula);
+            professor.setMatricula(matricula);
+            professor.setEmailUniversitario(emailUniversitario);
 
-        return professor;
+            Long id = usuarioService.salvarUsuario(professor.getNome(), professor.getEmailUniversitario(),
+                    professor.getCpf(), professor.getEmail(),Perfil.PROFESSOR);
+
+            professor.setId(id);
+
+            professorRepository.save(professor);
+        }
     }
 
     public Page<DadosListagemProfessor> listar(Pageable paginacao) {

@@ -14,7 +14,7 @@
                             <a href="../professores/listagem-professor.html" th:href="@{/professores}">Professores</a>
                         </li>
 
-                        <li sec:authorize="hasRole('UNIVERSITARIO')">
+                        <li sec:authorize="hasRole('GESTOR')">
                             <a href="../universitarios/listagem-universitario.html" th:href="@{/universitarios}">Universitarios</a>
                         </li>
 

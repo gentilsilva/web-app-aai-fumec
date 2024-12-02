@@ -1,0 +1,1 @@
+ALTER TABLE universitarios MODIFY id BIGINT NOT NULL;

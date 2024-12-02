@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/universitarios")
+@PreAuthorize("hasRole('GESTOR')")
 public class UniversitarioController {
 
     private static final String PAGINA_LISTAGEM = "universitarios/listagem-universitario";

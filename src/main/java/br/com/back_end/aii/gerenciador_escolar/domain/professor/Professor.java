@@ -9,7 +9,6 @@ import java.util.UUID;
 public class Professor {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String matricula;
     private String nome;
@@ -33,6 +32,11 @@ public class Professor {
 
     public Long getId() {
         return id;
+    }
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getMatricula() {
@@ -73,10 +77,11 @@ public class Professor {
     }
 
     public String geradorEmailUniversitario(String matricula) {
-        return matricula + "@fumec.br";
+        return matricula + "@scgest.br";
     }
 
     public void desativarProfessor() {
         this.ativo = false;
     }
+
 }
