@@ -1,5 +1,6 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.professor;
 
+import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

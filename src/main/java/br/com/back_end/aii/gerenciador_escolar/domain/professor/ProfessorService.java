@@ -1,6 +1,6 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.professor;
 
-import br.com.back_end.aii.gerenciador_escolar.domain.universitario.Universitario;
+import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
 import br.com.back_end.aii.gerenciador_escolar.domain.usuario.Perfil;
 import br.com.back_end.aii.gerenciador_escolar.domain.usuario.UsuarioService;
 import br.com.back_end.aii.gerenciador_escolar.infra.exception.RegraDeNegocioException;

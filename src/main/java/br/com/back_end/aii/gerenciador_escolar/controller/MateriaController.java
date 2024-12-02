@@ -1,9 +1,9 @@
 package br.com.back_end.aii.gerenciador_escolar.controller;
 
-import br.com.back_end.aii.gerenciador_escolar.domain.professor.DadosCadastroProfessor;
-import br.com.back_end.aii.gerenciador_escolar.domain.professor.DadosListagemProfessor;
+import br.com.back_end.aii.gerenciador_escolar.domain.materia.DadosCadastroMateria;
+import br.com.back_end.aii.gerenciador_escolar.domain.materia.DadosListagemMateria;
+import br.com.back_end.aii.gerenciador_escolar.domain.materia.MateriaService;
 import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
-import br.com.back_end.aii.gerenciador_escolar.domain.professor.ProfessorService;
 import br.com.back_end.aii.gerenciador_escolar.infra.exception.RegraDeNegocioException;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -18,18 +18,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/professores")
+@RequestMapping("/materias")
 @PreAuthorize("hasRole('GESTOR')")
-public class ProfessorController {
+public class MateriaController {
 
-    private static final String PAGINA_LISTAGEM = "professores/listagem-professor";
-    private static final String PAGINA_CADASTRO = "professores/formulario-professor";
-    private static final String REDIRECT_LISTAGEM = "redirect:/professores?sucesso";
+    private static final String PAGINA_LISTAGEM = "materias/listagem-materia";
+    private static final String PAGINA_CADASTRO = "materias/formulario-materia";
+    private static final String REDIRECT_LISTAGEM = "redirect:/materias?sucesso";
 
-    private final ProfessorService professorService;
+    private final MateriaService materiaService;
 
-    public ProfessorController(ProfessorService professorService) {
-        this.professorService = professorService;
+    public MateriaController(MateriaService materiaService) {
+        this.materiaService = materiaService;
     }
 
     @ModelAttribute("formacoes")
@@ -39,28 +39,28 @@ public class ProfessorController {
 
     @GetMapping
     public String getPaginaListagem(@PageableDefault Pageable paginacao, Model model) {
-        Page<DadosListagemProfessor> dadosListagemProfessorPage = professorService.listar(paginacao);
-        model.addAttribute("professores", dadosListagemProfessorPage);
+        Page<DadosListagemMateria> dadosListagemMaterias = materiaService.listar(paginacao);
+        model.addAttribute("materias", dadosListagemMaterias);
         return PAGINA_LISTAGEM;
     }
 
     @GetMapping("/formulario")
     public String getPaginaCadastro(Long id, Model model) {
         if (id != null) {
-            model.addAttribute("dados", professorService.carregarPorId(id));
+            model.addAttribute("dados", materiaService.carregarPorId(id));
         } else {
-            model.addAttribute("dados", new DadosCadastroProfessor(null, "", "", "", null));
+            model.addAttribute("dados", new DadosCadastroMateria(null, "", null, "", null, null));
         }
         return PAGINA_CADASTRO;
     }
 
     @PostMapping
-    public String cadastrar(@Valid @ModelAttribute("dados")DadosCadastroProfessor dados, BindingResult result, Model model) {
+    public String cadastrar(@Valid @ModelAttribute("dados") DadosCadastroMateria dados, BindingResult result, Model model) {
         if(result.hasErrors()) {
             model.addAttribute("dados", dados);
         }
         try {
-            professorService.cadastrarProfessor(dados);
+            materiaService.cadastrarMateria(dados);
             return REDIRECT_LISTAGEM;
         } catch (RegraDeNegocioException e) {
             model.addAttribute("erro", e.getMessage());
@@ -71,13 +71,13 @@ public class ProfessorController {
 
     @GetMapping("{formacao}")
     @ResponseBody
-    public List<DadosListagemProfessor> listarProfessoresPorFormacao(@PathVariable String formacao) {
-        return professorService.listarPorFormacao(Formacao.valueOf(formacao));
+    public List<DadosListagemMateria> listarMateriasPorFormacao(@PathVariable String formacao) {
+        return materiaService.listarPorFormacao(Formacao.valueOf(formacao));
     }
 
     @DeleteMapping
     public String excluir(Long id) {
-        professorService.excluir(id);
+        materiaService.excluir(id);
         return REDIRECT_LISTAGEM;
     }
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Cadastro de Materias</title>
+</head>
+
+<body>
+    <div layout:fragment="conteudo">
+        <main class="container">
+            <section class="card form-card">
+                <h2 class="title">Cadastro de materias</h2>
+
+                <form method="post" action="#" th:action="@{/materias}" th:object="${dados}">
+                    <input type="hidden" name="id" th:field="*{id}">
+
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input id="nome" name="nome" th:field="*{nome}" required>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro!</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="semestre">Semestre:</label>
+                        <input id="semestre" name="semestre" th:field="*{semestre}" required>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('semestre')}" th:errors="*{semestre}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codigo">Código:</label>
+                        <input id="codigo" name="codigo" th:field="*{codigo}" required>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="horasSemestre">Horas:</label>
+                        <input id="horasSemestre" name="horas" th:field="*{horasSemestre}" required>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('horasSemestre')}" th:errors="*{horasSemestre}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="formacao">Formação</label>
+                        <select id="formacao" name="formacao" required th:field="*{formacao}">
+                            <option th:value="${null}">Selecione uma formacao</option>
+                            <option th:each="formacao : ${formacoes}" th:value="${formacao}" th:text="${formacao}" th:selected="${dados.formacao == formacao}"></option>
+                        </select>
+                        <div class="alert alert-danger" th:if="${#fields.hasErrors('formacao')}" th:errors="*{formacao}"></div>
+                    </div>
+
+                    <div class="buttons">
+                        <button type="submit" class="btn btn-primary">
+                            <img src="/static/assets/plus.png" th:src="@{/assets/plus.png}" alt="Ícone de adicionar" class="btn-icon">Cadastrar
+                        </button>
+
+                        <a href="listagem-materia.html" th:href="@{/materias}" class="btn btn-secondary">
+                            <img src="/static/assets/back.png" th:src="@{/assets/back.png}" alt="Voltar" class="btn-icon">Voltar
+                        </a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,7 +1,10 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.professor;
 
+import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
+import br.com.back_end.aii.gerenciador_escolar.domain.turma.Turma;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,6 +21,9 @@ public class Professor {
     @Enumerated(EnumType.STRING)
     private Formacao formacao;
     private Boolean ativo;
+
+    @OneToMany(mappedBy = "professor")
+    private List<Turma> turmas;
 
     public Professor() {
     }

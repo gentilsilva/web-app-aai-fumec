@@ -1,5 +1,6 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.professor;
 
+import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

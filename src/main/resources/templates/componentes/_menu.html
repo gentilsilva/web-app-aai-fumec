@@ -10,12 +10,16 @@
                 <li class="dropdown">
                     <a href="#">CADASTROS <i class="arrow-down"></i></a>
                     <ul class="dropdown-menu">
-                        <li sec:authorize="!hasRole('PROFESSOR')">
+                        <li sec:authorize="hasRole('GESTOR')">
                             <a href="../professores/listagem-professor.html" th:href="@{/professores}">Professores</a>
                         </li>
 
                         <li sec:authorize="hasRole('GESTOR')">
                             <a href="../universitarios/listagem-universitario.html" th:href="@{/universitarios}">Universitarios</a>
+                        </li>
+
+                        <li sec:authorize="hasRole('GESTOR')">
+                            <a href="../materias/listagem-materia.html.html" th:href="@{/materias}">Matérias</a>
                         </li>
 
                         <li>

@@ -1,5 +1,7 @@
 package br.com.back_end.aii.gerenciador_escolar.domain.professor;
 
+import br.com.back_end.aii.gerenciador_escolar.domain.formacao.Formacao;
+
 public record DadosListagemProfessor(
         Long id,
         String matricula,

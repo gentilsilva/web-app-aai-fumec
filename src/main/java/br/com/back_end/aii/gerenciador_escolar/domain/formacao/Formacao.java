@@ -1,4 +1,4 @@
-package br.com.back_end.aii.gerenciador_escolar.domain.professor;
+package br.com.back_end.aii.gerenciador_escolar.domain.formacao;
 
 public enum Formacao {
     ADMINISTRACAO,
